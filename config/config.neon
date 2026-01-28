@@ -1,0 +1,31 @@
+# ======================================
+# Includes =============================
+includes:
+	- doctrine.neon
+
+# ======================================
+# Config ===============================
+php:
+	date.timezone: Europe/Prague
+	# session.save_path: %tempDir%/session
+
+# ======================================
+# Parameters ===========================
+parameters:
+	database:
+		driver: pdo_sqlite
+		path: "%appDir%/../db/db.sqlite"
+		password: test
+		user: test
+
+# ======================================
+# Services =============================
+services:
+	# Domain
+	- App\Domain\User\UserRepository
+
+	# Console
+	- App\Console\UserListCommand
+	- App\Console\UserNewCommand
+	- App\Console\UserShowCommand
+	- App\Console\UserDeleteCommand

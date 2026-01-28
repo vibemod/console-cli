@@ -1,0 +1,33 @@
+extensions:
+	console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
+
+	nettrine.dbal: Nettrine\DBAL\DI\DbalExtension
+	nettrine.orm: Nettrine\ORM\DI\OrmExtension
+
+	nettrine.migrations: Nettrine\Migrations\DI\MigrationsExtension
+
+nettrine.dbal:
+	debug:
+		panel: %debugMode%
+		sourcePaths: [%appDir%]
+
+	connections:
+		default:
+			driver: %database.driver%
+			path: %database.path%
+			password: %database.password%
+			user: %database.user%
+
+nettrine.orm:
+	managers:
+		default:
+			connection: default
+			mapping:
+				App:
+					type: attributes
+					directories: [%appDir%/Domain]
+					namespace: App\Domain
+
+nettrine.migrations:
+	directories:
+		DB\Migrations: %appDir%/../db
